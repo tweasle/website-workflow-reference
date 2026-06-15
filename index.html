@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Business Workflow — Full System Diagram</title>
+        <title>Business Workflow — Full System Diagram v2</title>
         <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
             rel="stylesheet"
@@ -588,7 +588,22 @@
     </head>
     <body>
         <div class="diagram-header">
-            <h1>Full Business Workflow</h1>
+            <h1>
+                Full Business Workflow
+                <span
+                    style="
+                        font-size: 0.75rem;
+                        font-weight: 500;
+                        background: #21262d;
+                        color: #7d8590;
+                        padding: 3px 10px;
+                        border-radius: 20px;
+                        vertical-align: middle;
+                        letter-spacing: 0.5px;
+                    "
+                    >v2</span
+                >
+            </h1>
             <p>
                 Every tool, connection, and instruction — from finding leads to
                 logging taxes
@@ -795,6 +810,118 @@
                         </div>
                         <div class="deps">
                             <span class="dep dep-claude">Claude Pro</span>
+                        </div>
+                    </div>
+
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                        <div class="arrow-label">5 days, no status change</div>
+                        <div class="arrow-head"></div>
+                    </div>
+
+                    <!-- Node: Follow-up reminder — NEW v2 -->
+                    <div
+                        class="node"
+                        style="
+                            border-color: color-mix(
+                                in srgb,
+                                var(--lane-find-accent) 35%,
+                                transparent
+                            );
+                        "
+                    >
+                        <div class="node-top">
+                            <div style="flex: 1">
+                                <div class="tool-badge badge-make">
+                                    <div
+                                        class="tool-dot"
+                                        style="background: var(--make)"
+                                    ></div>
+                                    Make
+                                </div>
+                                <span
+                                    style="
+                                        font-size: 0.7rem;
+                                        background: color-mix(
+                                            in srgb,
+                                            var(--lane-find-accent) 15%,
+                                            transparent
+                                        );
+                                        color: var(--lane-find-accent);
+                                        padding: 2px 8px;
+                                        border-radius: 20px;
+                                        font-weight: 600;
+                                        letter-spacing: 0.4px;
+                                        font-size: 0.68rem;
+                                        margin-left: 4px;
+                                    "
+                                    >NEW v2</span
+                                >
+                                <div class="node-title">
+                                    Lead Follow-Up Reminder
+                                </div>
+                            </div>
+                        </div>
+                        <div class="node-desc">
+                            Make checks daily for Client rows where Status =
+                            "Demo Sent" and Date Added is more than 5 days ago
+                            with no update. Sends you an email nudge so no lead
+                            goes cold by accident.
+                        </div>
+                        <div class="instructions">
+                            <div class="instructions-label">
+                                Make scenario steps
+                            </div>
+                            <ul>
+                                <li>Trigger: Schedule → every day at 9 AM</li>
+                                <li>Action: Notion → Search Clients DB</li>
+                                <li>
+                                    Filter: Status = "Demo Sent" AND Date Added
+                                    &lt; today − 5 days
+                                </li>
+                                <li>
+                                    Filter: Status ≠ "Closed — Won" AND ≠
+                                    "Closed — Lost"
+                                </li>
+                                <li>
+                                    Action: Email → send one alert per stale
+                                    lead
+                                </li>
+                                <li>
+                                    Subject: "⏰ Follow up with [Business Name]
+                                    — demo sent 5+ days ago"
+                                </li>
+                                <li>
+                                    Body: name, phone, demo URL, date sent —
+                                    everything in one tap
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="instructions" style="margin-top: 8px">
+                            <div class="instructions-label">
+                                Why this matters
+                            </div>
+                            <ul>
+                                <li>
+                                    Most closes happen on the 2nd or 3rd
+                                    contact, not the first
+                                </li>
+                                <li>
+                                    This runs silently — you only hear from it
+                                    when action is needed
+                                </li>
+                                <li>
+                                    Dismiss it by updating Status to
+                                    "Negotiating" or "Closed — Lost"
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deps">
+                            <span class="dep dep-make">Make free tier</span>
+                            <span class="dep dep-notion"
+                                >Notion Clients DB</span
+                            >
+                            <span class="dep dep-email">Gmail / any email</span>
                         </div>
                     </div>
                 </div>
@@ -1187,16 +1314,35 @@
                                     ></div>
                                     Email
                                 </div>
+                                <span
+                                    style="
+                                        font-size: 0.7rem;
+                                        background: color-mix(
+                                            in srgb,
+                                            var(--lane-money-accent) 15%,
+                                            transparent
+                                        );
+                                        color: var(--lane-money-accent);
+                                        padding: 2px 8px;
+                                        border-radius: 20px;
+                                        font-weight: 600;
+                                        letter-spacing: 0.4px;
+                                        font-size: 0.68rem;
+                                        margin-left: 4px;
+                                    "
+                                    >UPDATED v2</span
+                                >
                                 <div class="node-title">
-                                    Tax Set-Aside Notification
+                                    Tax Set-Aside Notification + Deep Link
                                 </div>
                             </div>
                         </div>
                         <div class="node-desc">
-                            You receive an email immediately after every payment
-                            with the net amount, the Stripe fee, and the exact
-                            dollar figure to move to your tax savings account.
-                            No math required.
+                            You receive an email immediately after every
+                            payment. It shows the exact amount to move, and
+                            includes a one-click deep link directly to the
+                            Notion tax reminder row — no searching, no
+                            dashboard.
                         </div>
                         <div class="instructions">
                             <div class="instructions-label">
@@ -1218,9 +1364,37 @@
                                 <li>Stripe ID: [pi_xxxxx] for records</li>
                             </ul>
                         </div>
+                        <div class="instructions" style="margin-top: 8px">
+                            <div class="instructions-label">
+                                Deep-link setup (NEW v2)
+                            </div>
+                            <ul>
+                                <li>
+                                    Make captures the Notion page URL returned
+                                    when it creates the tax row
+                                </li>
+                                <li>
+                                    That URL is injected into the email as a
+                                    button: "✅ Mark as moved →"
+                                </li>
+                                <li>
+                                    One click from email opens the exact Notion
+                                    row — tick the checkbox, done
+                                </li>
+                                <li>
+                                    In Make: use the "url" field from the Notion
+                                    Create response as the link href
+                                </li>
+                                <li>
+                                    No email reply parsing needed — simpler and
+                                    more reliable
+                                </li>
+                            </ul>
+                        </div>
                         <div class="deps">
                             <span class="dep dep-email">Gmail / any email</span>
                             <span class="dep dep-make">Make scenario</span>
+                            <span class="dep dep-notion">Notion page URL</span>
                         </div>
                     </div>
 
@@ -1284,6 +1458,134 @@
                             >
                         </div>
                     </div>
+
+                    <div class="arrow">
+                        <div class="arrow-line"></div>
+                        <div class="arrow-label">
+                            1st of every month, automatic
+                        </div>
+                        <div class="arrow-head"></div>
+                    </div>
+
+                    <!-- Node: Monthly income summary — NEW v2 -->
+                    <div
+                        class="node"
+                        style="
+                            border-color: color-mix(
+                                in srgb,
+                                var(--lane-money-accent) 35%,
+                                transparent
+                            );
+                        "
+                    >
+                        <div class="node-top">
+                            <div style="flex: 1">
+                                <div class="tool-badge badge-make">
+                                    <div
+                                        class="tool-dot"
+                                        style="background: var(--make)"
+                                    ></div>
+                                    Make
+                                </div>
+                                <span
+                                    style="
+                                        background: color-mix(
+                                            in srgb,
+                                            var(--lane-money-accent) 15%,
+                                            transparent
+                                        );
+                                        color: var(--lane-money-accent);
+                                        padding: 2px 8px;
+                                        border-radius: 20px;
+                                        font-weight: 600;
+                                        letter-spacing: 0.4px;
+                                        font-size: 0.68rem;
+                                        margin-left: 4px;
+                                    "
+                                    >NEW v2</span
+                                >
+                                <div class="node-title">
+                                    Monthly Income Summary
+                                </div>
+                            </div>
+                        </div>
+                        <div class="node-desc">
+                            On the 1st of every month Make queries your Notion
+                            Transactions DB, totals the prior month's income,
+                            expenses, net, and tax set-aside, then emails you a
+                            clean one-screen summary. No manual tallying ever.
+                        </div>
+
+                        <div class="tax-callout">
+                            <div class="tax-callout-label">
+                                Summary email content
+                            </div>
+                            <div class="tax-formula">
+                                Month: [Month Year]<br />Gross income: $[sum
+                                Income]<br />Stripe fees: −$[sum Stripe Fee]<br />Other
+                                expenses: −$[sum Expenses]<br />Net: $[net]<br />Tax
+                                set-aside: $[net × 0.30]<br />────────────────────<br />Unchecked
+                                tax rows: [count]
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <div class="instructions-label">
+                                Make scenario steps
+                            </div>
+                            <ul>
+                                <li>
+                                    Trigger: Schedule → 1st of month at 8 AM
+                                </li>
+                                <li>Action: Notion → Query Transactions DB</li>
+                                <li>Filter: Date = prior calendar month</li>
+                                <li>
+                                    Aggregate: sum Amount by Type (Income /
+                                    Expense)
+                                </li>
+                                <li>
+                                    Calculate: net, tax set-aside (×0.30),
+                                    quarterly run-rate
+                                </li>
+                                <li>
+                                    Count: tax rows where "Moved to savings"
+                                    checkbox is unchecked
+                                </li>
+                                <li>
+                                    Action: Email → send formatted monthly
+                                    summary
+                                </li>
+                                <li>
+                                    Bonus: include "on pace for $[annualised]
+                                    this year" line
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="instructions" style="margin-top: 8px">
+                            <div class="instructions-label">How to use it</div>
+                            <ul>
+                                <li>
+                                    Use as your quarterly tax input — forward to
+                                    your accountant
+                                </li>
+                                <li>
+                                    Ask Claude to analyse it: "Am I on pace for
+                                    my 4-year goal?"
+                                </li>
+                                <li>
+                                    Any unchecked tax rows flagged = prompt to
+                                    move money before quarter end
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deps">
+                            <span class="dep dep-make">Make free tier</span>
+                            <span class="dep dep-notion"
+                                >Notion Transactions DB</span
+                            >
+                            <span class="dep dep-email">Gmail / any email</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1298,6 +1600,19 @@
                     <span class="flow-pill badge-make">Make filters</span>
                     <span class="flow-arrow">→</span>
                     <span class="flow-pill badge-notion">Notion: Lead</span>
+                    <span class="flow-arrow">→</span>
+                    <span
+                        class="flow-pill badge-make"
+                        style="
+                            border: 1px solid
+                                color-mix(
+                                    in srgb,
+                                    var(--lane-find-accent) 40%,
+                                    transparent
+                                );
+                        "
+                        >Make: follow-up reminder</span
+                    >
                     <span class="flow-arrow">→</span>
                     <span class="flow-pill badge-claude"
                         >Claude: research + outreach</span
@@ -1315,10 +1630,25 @@
                     <span class="flow-arrow">→</span>
                     <span class="flow-pill badge-stripe">Stripe: invoice</span>
                     <span class="flow-arrow">→</span>
-                    <span class="flow-pill badge-make">Make: log + alert</span>
+                    <span class="flow-pill badge-make"
+                        >Make: log + deep-link alert</span
+                    >
                     <span class="flow-arrow">→</span>
                     <span class="flow-pill badge-notion"
                         >Notion: closed + tax checkbox</span
+                    >
+                    <span class="flow-arrow">→</span>
+                    <span
+                        class="flow-pill badge-make"
+                        style="
+                            border: 1px solid
+                                color-mix(
+                                    in srgb,
+                                    var(--lane-money-accent) 40%,
+                                    transparent
+                                );
+                        "
+                        >Make: monthly summary</span
                     >
                 </div>
             </div>
@@ -1350,17 +1680,25 @@
             </div>
             <div class="footer-section">
                 <div class="footer-label">
-                    Make scenarios to build (2 total)
+                    Make scenarios to build (4 total — v2)
                 </div>
                 <div class="footer-item">
                     Scenario 1: Yelp → filter → Notion Lead (daily 8 AM)
                 </div>
                 <div class="footer-item">
-                    Scenario 2: Stripe payment → Notion log + email alert + tax
-                    row
+                    Scenario 2: Stripe payment → Notion log + deep-link email +
+                    tax row
                 </div>
                 <div class="footer-item">
-                    Both run on Make free tier (1,000 ops/mo)
+                    Scenario 3 (NEW): Demo Sent 5+ days → follow-up reminder
+                    email (daily 9 AM)
+                </div>
+                <div class="footer-item">
+                    Scenario 4 (NEW): 1st of month → query Notion → monthly
+                    summary email
+                </div>
+                <div class="footer-item">
+                    All four run on Make free tier (1,000 ops/mo)
                 </div>
                 <div class="footer-item">
                     Upgrade to Make Core ($9/mo) if ops exceed limit
